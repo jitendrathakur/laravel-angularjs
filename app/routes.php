@@ -16,5 +16,8 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+
+Route::get('users/customers', array('uses' => 'UsersController@customers', 'as' => 'users.customers'));
+
 /* Group Route start */ 
 Route::resource('users', 'UsersController');

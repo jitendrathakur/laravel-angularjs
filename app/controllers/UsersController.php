@@ -9,9 +9,21 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = User::all();
+		return View::make('users.index');
+	}
 
-		return View::make('users.index', compact('users'));
+
+	/**
+	 * Display a listing of users
+	 *
+	 * @return Response
+	 */
+	public function customers()
+	{
+		$users = User::all();
+		$user = $users->toArray();
+	
+		return View::make('users.customers', compact('user'));			
 	}
 
 	/**
