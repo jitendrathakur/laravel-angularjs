@@ -9,7 +9,8 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('users.index');
+		return Response::json(User::get());
+		//return View::make('users.index');
 	}
 
 
@@ -43,16 +44,13 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), User::$rules);
+		User::create(array(
+			'name' => Input::get('name'),
+			'email' => Input::get('email'),
+			'mobile' => Input::get('mobile'),
+		));
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-
-		User::create($data);
-
-		return Redirect::route('users.index');
+		return Response::json(array('success' => true));
 	}
 
 	/**
@@ -113,7 +111,7 @@ class UsersController extends \BaseController {
 	{
 		User::destroy($id);
 
-		return Redirect::route('users.index');
+		return Response::json(array('success' => true));
 	}
 
 }
