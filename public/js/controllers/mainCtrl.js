@@ -27,16 +27,23 @@ angular.module('mainCtrl', [])
 			// use the function we created in our service
 			User.save($scope.userData)
 				.success(function(data) {
-
-					// if successful, we'll need to refresh the comment list
-					User.get()
-						.success(function(getData) {
-							$scope.users = getData;
-							$scope.loading = false;
-						});
+					if (data.success) {
+						// if successful, we'll need to refresh the comment list
+						User.get()
+							.success(function(getData) {
+								$scope.users = getData;
+								$scope.loading = false;
+							});
+					} else {						
+						$.each(data.error, function(x, y) {						
+			              $('.'+x).text(y[0]);    
+			              //$('.'+x).closest('div').addClass('error');			            
+			            });
+			            $scope.loading = false;
+					}					
 
 				})
-				.error(function(data) {
+				.error(function(data) {					
 					console.log(data);
 				});
 		};

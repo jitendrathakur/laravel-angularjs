@@ -44,13 +44,29 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		User::create(array(
-			'name' => Input::get('name'),
-			'email' => Input::get('email'),
-			'mobile' => Input::get('mobile'),
-		));
 
-		return Response::json(array('success' => true));
+		$input = Input::all();	
+
+		// create a new model instance
+		$user = new User();
+		
+
+		if ($user->validate($input)) {
+
+			User::create(array(
+				'name' => Input::get('name'),
+				'email' => Input::get('email'),
+				'mobile' => Input::get('mobile'),
+			));
+
+			$response = array('success' => true);
+
+		} else {
+			$errors = $user->errors();
+			$response = array('success' => false, 'error' => $errors);	
+		}
+
+		return Response::json($response);
 	}
 
 	/**

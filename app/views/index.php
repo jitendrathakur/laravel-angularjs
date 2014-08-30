@@ -12,6 +12,7 @@
 		body 		{ padding-top:30px; }
 		form 		{ padding-bottom:20px; }
 		.user 	{ padding-bottom:20px; }
+		.error { color :red;}
 	</style>
 
 	<!-- JS -->
@@ -27,6 +28,9 @@
 </head>
 <!-- declare our angular app and controller -->
 <body class="container" ng-app="userApp" ng-controller="mainController">
+	<script>
+	    var rootUrl = "<?php echo URL::to('') ?>";
+	</script>
 <div class="col-md-8 col-md-offset-2">
 
 	<!-- PAGE TITLE =============================================== -->
@@ -40,16 +44,19 @@
 		<!-- AUTHOR -->
 		<div class="form-group">
 			<input type="text" class="form-control input-lg" name="name" ng-model="userData.name" placeholder="Name">
+			<span class="error name"></span>
 		</div>
 
 		<!-- USER TEXT -->
 		<div class="form-group">
 			<input type="text" class="form-control input-lg" name="email" ng-model="userData.email" placeholder="email">
+			<span class="error email"></span>
 		</div>
 
 		<!-- USER TEXT -->
 		<div class="form-group">
 			<input type="text" class="form-control input-lg" name="mobile" ng-model="userData.mobile" placeholder="mobile">
+			<span class="error mobile"></span>
 		</div>
 		
 		<!-- SUBMIT BUTTON -->

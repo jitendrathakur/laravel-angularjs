@@ -6,22 +6,22 @@ angular.module('userService', [])
 		return {
 			// get all the comments
 			get : function() {
-				return $http.get('/laravel-angularjs/public/api/users');
+				return $http.get(rootUrl + '/api/users');
 			},
 
-			// save a comment (pass in comment data)
-			save : function(commentData) {
+			// save a comment (pass in user data)
+			save : function(userData) {
 				return $http({
 					method: 'POST',
-					url: '/laravel-angularjs/public/api/users',
+					url: rootUrl+'/api/users',
 					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-					data: $.param(commentData)
+					data: $.param(userData)
 				});
 			},
 
 			// destroy a comment
 			destroy : function(id) {
-				return $http.delete('/laravel-angularjs/public/api/users/' + id);
+				return $http.delete(rootUrl+'/api/users/' + id);
 			}
 		}
 
